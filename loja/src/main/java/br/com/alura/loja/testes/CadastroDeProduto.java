@@ -6,23 +6,22 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.alura.loja.DAO.ProdutoDAO;
+import br.com.alura.loja.modelo.Categoria;
 import br.com.alura.loja.modelo.Produto;
+import br.com.alura.loja.ultil.JPAUltil;
 
 public class CadastroDeProduto {
 	
 	public static void main(String[] args) {
-		Produto celular = new Produto();
-		celular.setNome("Xiaomi Poco");
-		celular.setDescricao("Bom demais");
-		celular.setPreco(new BigDecimal("800"));
+		Produto celular = new Produto("Xiaomi Poco", "Bom demais", new BigDecimal("800"), Categoria.CELULARES);
 		
-		//criando um objeto do tipo EntiyManager
-		//O parâmetro passadoo no factory é o  name do persistence-unit que esta no persistence.xml
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("loja");
-		EntityManager em = factory.createEntityManager();
+		EntityManager em = JPAUltil.getEntityManager();
+		ProdutoDAO dao = new ProdutoDAO(em);
+		
 		//estou inserindo o celular na tabela mapeei na classe Produto
 		em.getTransaction().begin(); //inicia a tranzação
-		em.persist(celular);
+		dao.cadastrar(celular);;
 		em.getTransaction().commit();
 		em.close();
 	}

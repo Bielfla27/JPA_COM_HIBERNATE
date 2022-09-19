@@ -112,3 +112,10 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+
+# lembre de colocar o nome da pasta sem o ponto na frente
+# Para ignorar todos arquivos e sub-pastas localizados na pasta metadata/plugins/
+metadata/plugins/nome-do-plugin
+
+# Para ignorar todos os arquivos e sub-pastas da pasta metadata/
+metadata/

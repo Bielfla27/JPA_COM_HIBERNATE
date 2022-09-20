@@ -1,5 +1,6 @@
 package br.com.alura.loja.DAO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -23,22 +24,29 @@ public class ProdutoDAO {
 	}
 	
 	public List<Produto> buscarTodos(){
-		String jpql = "SELECT p FROM Produto p";
+		String jpql = "SELECT p FROM Produto p"; //lembrar que aqui ele passa o nome que está na entidade não na tabela
 		return em.createQuery(jpql,Produto.class).getResultList();
 	}
 	
 	public List<Produto> buscarPorNome(String nome){
-		String jpql = "SELECT p FROM Produto p Where p.nome = :nome";
+		String jpql = "SELECT p FROM Produto p Where p.nome = :nome"; //lembrar que aqui ele passa o nome que está na entidade não na tabela
 		return em.createQuery(jpql,Produto.class)
 				.setParameter("nome", nome)
 				.getResultList();
 	}
 
 	public List<Produto> buscarPorNomeDaCategoria(String nome){
-		String jpql = "SELECT p FROM Produto p Where p.categoria.nome = :nome";
+		String jpql = "SELECT p FROM Produto p Where p.categoria.nome = :nome"; //lembrar que aqui ele passa o nome que está na entidade não na tabela
 		return em.createQuery(jpql,Produto.class)
 				.setParameter("nome", nome)
 				.getResultList();
+	}
+	
+	public BigDecimal buscarPrecoDoProdutoComNome(String nome){
+		String jpql = "SELECT p.preco FROM Produto p Where p.nome = :nome"; //lembrar que aqui ele passa o nome que está na entidade não na tabela
+		return em.createQuery(jpql,BigDecimal.class)
+				.setParameter("nome", nome)
+				.getSingleResult(); //Com o método SingleResult trago apenasa um resultado de consulta
 	}
 
 }

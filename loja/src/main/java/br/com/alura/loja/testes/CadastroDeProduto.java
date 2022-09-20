@@ -30,6 +30,9 @@ public class CadastroDeProduto {
 		List<Produto> produtoPeloNomeDaCategoria = produtoDao.buscarPorNomeDaCategoria("CELULARES");
 		produtoPeloNomeDaCategoria.forEach(p2 -> System.out.println(p.getNome()));
 		
+		BigDecimal precoDoProduto = produtoDao.buscarPrecoDoProdutoComNome("Xiaomi Poco");
+		System.out.println(precoDoProduto);
+		
 	}
 
 	private static void cadastrarProduto() {

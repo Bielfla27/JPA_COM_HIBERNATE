@@ -23,6 +23,13 @@ public class CadastroDeProduto {
 		
 		List<Produto> produtos = produtoDao.buscarTodos();
 		produtos.forEach(p2 -> System.out.println(p.getNome()));
+		
+		List<Produto> produtoPeloNome = produtoDao.buscarPorNome("Xiaomi Poco");
+		produtoPeloNome.forEach(p2 -> System.out.println(p.getNome()));
+		
+		List<Produto> produtoPeloNomeDaCategoria = produtoDao.buscarPorNomeDaCategoria("CELULARES");
+		produtoPeloNomeDaCategoria.forEach(p2 -> System.out.println(p.getNome()));
+		
 	}
 
 	private static void cadastrarProduto() {

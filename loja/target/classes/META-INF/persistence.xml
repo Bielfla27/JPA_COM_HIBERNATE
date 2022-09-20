@@ -11,6 +11,7 @@
 			<property name="javax.persistence.jdbc.password" value=""/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 			<property name="hibernate.show_sql" value="true"/> <!-- Para imprimir todo sql no console-->
+			<property name="hibernate.format_sql" value="true"/> <!-- Para imprimir de firma indentada o sql-->
 			<property name="hibernate.hbm2ddl.auto" value="update"/> 
 		</properties>
 	

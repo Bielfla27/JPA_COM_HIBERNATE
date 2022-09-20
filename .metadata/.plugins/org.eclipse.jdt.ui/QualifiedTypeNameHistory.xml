@@ -14,4 +14,9 @@
     <fullyQualifiedTypeName name="javax.persistence.EntityManagerFactory"/>
     <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
     <fullyQualifiedTypeName name="br.com.alura.loja.ultil.JPAUltil"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="javax.persistence.Enumerated"/>
+    <fullyQualifiedTypeName name="javax.persistence.ManyToOne"/>
+    <fullyQualifiedTypeName name="br.com.alura.loja.modelo.Categoria"/>
+    <fullyQualifiedTypeName name="br.com.alura.loja.DAO.CategoriaDAO"/>
 </qualifiedTypeNameHistroy>

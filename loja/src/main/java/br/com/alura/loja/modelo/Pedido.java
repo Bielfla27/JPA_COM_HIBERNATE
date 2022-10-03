@@ -2,6 +2,7 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -24,9 +25,9 @@ public class Pedido {
 	private BigDecimal valorTotal;
 	@ManyToOne
 	private Cliente cliente;
-	
-	@OneToMany
-	private List<ItemPedido> itens;
+						  //atributo
+	@OneToMany(mappedBy = "pedido") //falando pra jpa que já existe esse relacionamento na outra classe atráves do atribudo pedido
+	private List<ItemPedido> itens = new ArrayList<>(); //sempre iniciar a lista por boa pratica
 	
     public Pedido() {
 
@@ -68,6 +69,11 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	void adicionarItem(ItemPedido item) {
+		item.setPedido(this);
+		this.itens.add(item);
 	}
     
 	

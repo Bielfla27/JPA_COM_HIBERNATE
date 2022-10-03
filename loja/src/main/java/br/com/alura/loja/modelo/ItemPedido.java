@@ -2,6 +2,7 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class ItemPedido {
 	@Id //dizendo a JPA que o primeiro � a chave prim�ria 
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse n�mero � o banco de dados e qual a estrategia que ele vai usar para salvar
 	private Long id;
+	@Column (name = "preco_unitario")//column + name = para dizer como quero que seja salvo no banco 
 	private BigDecimal precoUnitario;
 	private int quantidade;
 	@ManyToOne

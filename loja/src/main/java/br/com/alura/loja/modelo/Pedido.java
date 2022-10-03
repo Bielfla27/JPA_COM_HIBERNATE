@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,16 +24,22 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse n�mero � o banco de dados e qual a estrategia que ele vai usar para salvar
 	private Long id;
 	private LocalDate dataPedido = LocalDate.now();
+	@Column (name = "valor_total")//column + name = para dizer como quero que seja salvo no banco 
 	private BigDecimal valorTotal;
 	@ManyToOne
 	private Cliente cliente;
-						  //atributo
-	@OneToMany(mappedBy = "pedido") //falando pra jpa que já existe esse relacionamento na outra classe atráves do atribudo pedido
+						  //atributo		  o cascade serve para falar para a jpa tbm da um insert na tabela relacionada (bom pra evitar a quantidade de classes DAO)
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL) //falando pra jpa que já existe esse relacionamento na outra classe atráves do atribudo pedido
 	private List<ItemPedido> itens = new ArrayList<>(); //sempre iniciar a lista por boa pratica
 	
     public Pedido() {
 
     }
+    
+
+	public Pedido(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	public Pedido(LocalDate dataPedido, BigDecimal valorTotal, Cliente cliente) {
 		this.dataPedido = dataPedido;
@@ -71,7 +79,7 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 	
-	void adicionarItem(ItemPedido item) {
+	public void adicionarItem(ItemPedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
 	}

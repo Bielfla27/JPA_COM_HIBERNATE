@@ -10,8 +10,8 @@ import javax.persistence.Table;
 @Table (name = "clientes") //ensinando a JPA qual nome certo da tabelo
 public class Cliente {
 	
-	@Id //dizendo a JPA que o primeiro é a chave primária 
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse número é o banco de dados e qual a estrategia que ele vai usar para salvar
+	@Id //dizendo a JPA que o primeiro ï¿½ a chave primï¿½ria 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse nï¿½mero ï¿½ o banco de dados e qual a estrategia que ele vai usar para salvar
 	private Long id;
 	private String nome;
 	private String cpf;
@@ -21,7 +21,7 @@ public class Cliente {
 	}
 		
 	
-	public Cliente(Long id, String nome, String cpf) {
+	public Cliente( String nome, String cpf) {
 		this.nome = nome;
 		this.cpf = cpf;
 	}

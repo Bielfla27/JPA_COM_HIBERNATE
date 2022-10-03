@@ -2,12 +2,14 @@ package br.com.alura.loja.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,13 +17,16 @@ import javax.persistence.Table;
 public class Pedido {
 	
 
-	@Id //dizendo a JPA que o primeiro é a chave primária 
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse número é o banco de dados e qual a estrategia que ele vai usar para salvar
+	@Id //dizendo a JPA que o primeiro ï¿½ a chave primï¿½ria 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //dizendo a JPA que quem vai dar algum valor para esse nï¿½mero ï¿½ o banco de dados e qual a estrategia que ele vai usar para salvar
 	private Long id;
 	private LocalDate dataPedido = LocalDate.now();
 	private BigDecimal valorTotal;
 	@ManyToOne
 	private Cliente cliente;
+	
+	@OneToMany
+	private List<ItemPedido> itens;
 	
     public Pedido() {
 

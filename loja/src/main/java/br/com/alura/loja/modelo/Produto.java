@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class Produto {
 	private String descricao;
 	private BigDecimal preco;
 	private LocalDate dataCadastro = LocalDate.now();
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY) //colocando o fetch para ajustar a ter mais permace nas consultas
 	private Categoria categoria;
 
 	public Produto() {

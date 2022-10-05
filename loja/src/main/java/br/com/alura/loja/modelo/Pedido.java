@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,8 @@ public class Pedido {
 	private LocalDate dataPedido = LocalDate.now();
 	@Column (name = "valor_total")//column + name = para dizer como quero que seja salvo no banco 
 	private BigDecimal valorTotal = BigDecimal.ZERO;
-	@ManyToOne
+	
+	@ManyToOne(fetch = FetchType.LAZY) //colocando o fetch para ajustar a ter mais permace nas consultas
 	private Cliente cliente;
 						  //atributo		  o cascade serve para falar para a jpa tbm da um insert na tabela relacionada (bom pra evitar a quantidade de classes DAO)
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL) //falando pra jpa que já existe esse relacionamento na outra classe atráves do atribudo pedido

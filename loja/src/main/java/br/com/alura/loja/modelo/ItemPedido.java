@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +21,9 @@ public class ItemPedido {
 	@Column (name = "preco_unitario")//column + name = para dizer como quero que seja salvo no banco 
 	private BigDecimal precoUnitario;
 	private int quantidade;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY) //colocando o fetch para ajustar a ter mais permace nas consultas
 	private Pedido pedido;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY) //colocando o fetch para ajustar a ter mais permace nas consultas
 	private Produto produto;
 	
 	public ItemPedido() {

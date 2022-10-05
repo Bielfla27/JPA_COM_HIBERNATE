@@ -25,7 +25,7 @@ public class Pedido {
 	private Long id;
 	private LocalDate dataPedido = LocalDate.now();
 	@Column (name = "valor_total")//column + name = para dizer como quero que seja salvo no banco 
-	private BigDecimal valorTotal;
+	private BigDecimal valorTotal = BigDecimal.ZERO;
 	@ManyToOne
 	private Cliente cliente;
 						  //atributo		  o cascade serve para falar para a jpa tbm da um insert na tabela relacionada (bom pra evitar a quantidade de classes DAO)
@@ -82,6 +82,7 @@ public class Pedido {
 	public void adicionarItem(ItemPedido item) {
 		item.setPedido(this);
 		this.itens.add(item);
+		this.valorTotal = this.valorTotal.add(item.getValor());
 	}
     
 	

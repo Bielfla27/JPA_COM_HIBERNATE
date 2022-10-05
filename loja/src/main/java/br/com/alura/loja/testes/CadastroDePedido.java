@@ -9,6 +9,7 @@ import br.com.alura.loja.DAO.CategoriaDAO;
 import br.com.alura.loja.DAO.ClienteDAO;
 import br.com.alura.loja.DAO.PedidoDAO;
 import br.com.alura.loja.DAO.ProdutoDAO;
+import br.com.alura.loja.Vo.RelatorioDeVendasVo;
 import br.com.alura.loja.modelo.Categoria;
 import br.com.alura.loja.modelo.Cliente;
 import br.com.alura.loja.modelo.ItemPedido;
@@ -23,6 +24,7 @@ public class CadastroDePedido {
 		EntityManager em = JPAUltil.getEntityManager();
 		ProdutoDAO produtroDao = new ProdutoDAO(em);
 		Produto produto = produtroDao.buscarPorID(1l);
+		Produto produto1 = produtroDao.buscarPorID(2l);
 		ClienteDAO clienteDao = new ClienteDAO(em);
 		Cliente cliente = clienteDao.buscarPorID(1l);
 		
@@ -30,6 +32,7 @@ public class CadastroDePedido {
 		
 		Pedido pedido = new Pedido(cliente);
 		pedido.adicionarItem(new ItemPedido(10, pedido, produto));
+		pedido.adicionarItem(new ItemPedido(5, pedido, produto1));
 		PedidoDAO pedidoDao = new PedidoDAO(em);
 		pedidoDao.cadastrar(pedido);
 		em.getTransaction().commit(); 
@@ -37,17 +40,14 @@ public class CadastroDePedido {
 		BigDecimal totalVendido = pedidoDao.valorTotalVendido();
 		System.out.println("VALOR TOTAL: " + totalVendido);
 		
-		List<Object[]> relatorio = pedidoDao.relatorioDeVendas();
-		for (Object[] obj : relatorio) {
-			System.out.println(obj[0]);
-			System.out.println(obj[1]);
-			System.out.println(obj[2]);
-		}
+		List<RelatorioDeVendasVo> relatorio = pedidoDao.relatorioDeVendas();
+		relatorio.forEach(System.out::println);
 	}
 	
 	private static void popularBancoDeDados() {
 		Categoria Celulares = new Categoria("CELULARES");
 		Produto celular = new Produto("Xiaomi Poco", "Bom demais", new BigDecimal("800"), Celulares );
+		Produto celular1 = new Produto("Xiaomi 7", "Bom demais", new BigDecimal("650"), Celulares );
 		Cliente cliente = new Cliente("Luiz doido" , "123456"); 
 		
 		EntityManager em = JPAUltil.getEntityManager();
@@ -59,6 +59,7 @@ public class CadastroDePedido {
 		em.getTransaction().begin(); //inicia a tranza��o
 		categoriaDao.cadastrar(Celulares);
 		produtroDao.cadastrar(celular);;
+		produtroDao.cadastrar(celular1);
 		clienteDao.cadastrar(cliente);
 		em.getTransaction().commit();
 		em.close();

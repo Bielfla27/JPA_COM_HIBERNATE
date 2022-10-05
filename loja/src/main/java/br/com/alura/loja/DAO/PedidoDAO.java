@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import br.com.alura.loja.Vo.RelatorioDeVendasVo;
 import br.com.alura.loja.modelo.Pedido;
 
 public class PedidoDAO {
@@ -27,11 +28,11 @@ public class PedidoDAO {
 	}
 	
 	
-	public List<Object[]> relatorioDeVendas(){
-		String jpql = "SELECT produto.nome, SUM(item.quantidade), MAX(pedido.dataPedido) "
+	public List<RelatorioDeVendasVo> relatorioDeVendas(){
+		String jpql = "SELECT new br.com.alura.loja.Vo.RelatorioDeVendasVo(produto.nome, SUM(item.quantidade), MAX(pedido.dataPedido)) " //o new serve para criar uma instancia de uma classe e assim a jpa sabe que não é uma entidade 
 				+ "FROM Pedido pedido JOIN pedido.itens item JOIN item.produto produto "
 				+ "GROUP BY produto.nome ORDER BY item.quantidade DESC";
-		return em.createQuery(jpql, Object[].class).getResultList(); //o resultList me devolve uma lista de resultados
+		return em.createQuery(jpql, RelatorioDeVendasVo.class).getResultList(); //o resultList me devolve uma lista de resultados
 	}
 	
 	

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "produtos") //ensinando a JPA qual nome certo da tabelo
-@NamedQuery(name = "Produto.buscarPorNomeDaCategoria" , query = "SELECT p FROM Produto p Where p.categoria.nome = :nome") 
+@NamedQuery(name = "Produto.buscarPorNomeDaCategoria" , query = "SELECT p FROM Produto p Where p.categoria.id.nome = :nome") 
 @Inheritance(strategy = InheritanceType.JOINED) // para fazer herançã do tipo JOINED com jpa
 public class Produto {
 	

@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -15,6 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "produtos") //ensinando a JPA qual nome certo da tabelo
 @NamedQuery(name = "Produto.buscarPorNomeDaCategoria" , query = "SELECT p FROM Produto p Where p.categoria.nome = :nome") 
+@Inheritance(strategy = InheritanceType.JOINED) // para fazer herançã do tipo JOINED com jpa
 public class Produto {
 	
 	@Id //dizendo a JPA que o primeiro � a chave prim�ria 
